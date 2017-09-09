@@ -1,0 +1,29 @@
+#Program to calculate the altitude of a satellite
+
+import numpy as np
+from math import pi
+
+G = 6.67e-11
+M = 5.97e24
+R = 6.371e6
+
+T = float(input ("Enter desired value of T: "))
+
+h = ((G*M*T**2)/(4*np.pi*np.pi))**(1/3)-R
+
+print("(b) The correct altitude is: ",h,"meters")
+
+if(T==86400):
+    print("(c) The altitude of satellites that orbit once a day (geosynchronous orbit) is: ",h,"meters")
+elif(T==5400):
+    print("(c) The altitude of satellites once every 90 minutes is: ",h,"meters")
+elif(T==2700):
+    print("(c) The altitude of satellites once every 45 minutes is: ",h,"meters")
+elif(T==86148):
+    print("(c) The altitude of satellites that orbit once per sidereal day is: ",h,"meters")
+
+#PartB:
+#PartC: Once a day: 35855910 meters
+#        Once 90 minutes: 279321 meters
+#        Once 45 minutes: -2181559 meters
+#PartD: Difference=35855910-35773762=82148 meters
