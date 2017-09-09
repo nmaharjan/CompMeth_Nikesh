@@ -1,0 +1,12 @@
+#Program to perform the inverse operation of Polar.py
+
+import numpy as np
+from math import pi
+
+x = float(input("Enter x: "))
+y = float(input("Enter y: "))
+
+theta = (180/np.pi)*np.arctan(y/x)
+r = np.sqrt(x**2+y**2)
+
+print("r =",r,"theta =",theta)
