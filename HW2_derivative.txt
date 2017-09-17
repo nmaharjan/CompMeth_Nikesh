@@ -1,0 +1,38 @@
+#Program to calculate the derivative of a function f(x) at x = 1 with different values of delta
+
+def f(x):
+    return x*(x-1)
+
+x = 1
+
+def deriVative(x,delta):
+    return (f(x+delta) - f(x))/delta
+
+#Calculates the values of derivative of a function at different delta
+
+d1= deriVative(x,delta=1e-2)
+d2= deriVative(x,delta=1e-4)
+d3= deriVative(x,delta=1e-6)
+d4= deriVative(x,delta=1e-8)
+d5= deriVative(x,delta=1e-10)
+d6= deriVative(x,delta=1e-12)
+d7= deriVative(x,delta=1e-14)
+
+print("The derivative of the given function with delta = 1e-2, 1e-4, 1e-6, 1e-8, 1e-10, 1e-12, 1e-14, is respectively: ")
+print(
+"""
+d1 = {},
+d2 = {},
+d3 = {},
+d4 = {},
+d5 = {},
+d6 = {},
+d7 = {},
+"""
+.format(d1,d2,d3,d4,d5,d6,d7)
+)
+
+# (a) The analytical value of the derivative at x = 1, is 1 and it is comparable to the numerical calculation eventhough not perfectly.
+
+# (b) From the series of the delta variation, it is seen that the accuracy of the calculation initially upto 1e-10 gets better then get worse again. It is because the difference between the functional values goes very smaller.
+

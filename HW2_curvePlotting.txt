@@ -1,0 +1,33 @@
+#Program for cuve plotting
+
+from pylab import plot, show
+from numpy import cos,sin,linspace,pi,exp
+
+# (a) Make a plot of deltoid curve
+
+x = [(2*cos(theta)+cos(2*theta)) for theta in linspace (0,2*pi,1000)]
+y = [(2*sin(theta)-sin(2*theta)) for theta in linspace (0,2*pi,1000)]
+
+plot(x,y)
+show()
+
+# (b) Make a polar plot of Galilean spiral
+
+r = [theta**2 for theta in linspace(0,10*pi,1000)]
+theta = linspace(0,10*pi,1000)
+
+x = r*cos(theta)
+y = r*sin(theta)
+
+plot(x,y)
+show()
+
+# (c) Make a polar plot of Fey's function
+
+r = [(exp(cos(theta))-2*cos(4*theta)+(sin(theta/12)**5)) for theta in linspace(0,24*pi,1000)]
+theta = linspace(0,24*pi,1000)
+x = r*cos(theta)
+y = r*sin(theta)
+
+plot(x,y)
+show()
