@@ -1,0 +1,41 @@
+#Program to calculate the variation of specific heat of solid with temperature
+
+from gaussxw import gaussxw
+from numpy import linspace,exp
+import matplotlib.pyplot as plt
+
+def f(x):
+    return (exp(x)*x**4)/(exp(x)-1)**2
+
+N = 50
+
+thetaD = 428  #thetaD is a Debye temperature in per kelvin
+
+T = 5       #Initial temperature in kelvin
+
+V = 1e-3          #Volume of solid aluminium in cubic meters
+kB = 1.38e-23       #Boltzmann constant
+rho = 6.022e28      #Number Density of atoms    
+
+#Extracts the points from the gaussian quadrature
+x,w = gaussxw(N) 
+
+#(a)Python function that calculates Cv for a given temperature
+
+def cv(T):
+    a = 0.0
+    b = thetaD/T
+    g = 9*V*(T/thetaD)**(3)*kB*rho
+    xp = 0.5*(b-a)*x+0.5*(b+a)
+    wp = 0.5*(b-a)*w
+    s = sum(wp*f(xp))
+    return s*g
+
+#(b)To make a graph of the heat capacity as a function of temperature    
+
+T = linspace(5,500,100)
+Cv = [cv(Ti) for Ti in T]
+plt.plot(T,Cv,'m')
+plt.xlabel("Temperature, K")
+plt.ylabel("Heat capacity, Cv")
+plt.show()
