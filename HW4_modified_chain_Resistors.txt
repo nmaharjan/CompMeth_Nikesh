@@ -1,0 +1,24 @@
+# Program that solves the values of Vi in a chain of resistors,all having the same resistance R using the banded function
+
+from numpy import empty,zeros
+from banded import banded
+
+# Set up the initial values of the arrays
+N = 10000    # The number of internal junctions with unknown voltages
+A = empty([5,N],float)
+A[0,:] = -1
+A[1,:] = -1
+A[2,:] = 4
+A[3,:] = -1
+A[4,:] = -1
+A[2,0] = 3
+A[2,N-2] = 3
+
+v = zeros(N,float)
+v[0] = 5
+v[1] = 5
+
+# Solve the equations
+x = banded(A,v,2,2)
+print(x)
+
