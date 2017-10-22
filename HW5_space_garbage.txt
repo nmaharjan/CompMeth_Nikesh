@@ -1,0 +1,51 @@
+# Program that demonstrates the heavy steel rod and spherical ball-bearing are floating in zero gravity and the 
+# ball bearing orbit in a ellipse rather than in a circle.
+
+from numpy import sqrt,arange,array,zeros_like
+from pylab import*
+
+
+G = 1       # For simplicity, take the Gravitational constant value as 1
+M = 10      # Mass of the steel rod
+L = 2       # Length of the steel rod
+
+# Function that defines four first order equations from given two second-order equations
+def f(r,t):
+    drdt = zeros_like(r)
+    R = sqrt(r[0]**2+r[1]**2)
+    a = -G*M*1/sqrt(R**2+L**2/4)
+    drdt[0] = r[2]
+    drdt[1] = r[3]
+    drdt[2] = a*r[0]/R
+    drdt[3] = a*r[1]/R    
+    return array(drdt,float)
+
+# Define the orbit from t = 0 to t = 10 second
+a = 0.0
+b = 10.0
+N = 1000
+h = (b-a)/N
+tpoints = arange(a,b,h)
+
+# Initial condition at (x,y,vx,vy) = (1,0,0,1)
+r = array([1,0,0,1],float)
+
+xpoints = []
+ypoints = []
+
+# Use Runge Kutta method
+for t in tpoints:
+    xpoints.append(r[0])
+    ypoints.append(r[1])
+    k1 = h*f(r,t)
+    k2 = h*f(r+0.5*k1,t+0.5*h)
+    k3 = h*f(r+0.5*k2,t+0.5*h)
+    k4 = h*f(r+k3,t+h)
+    r += (k1+2*k2+2*k3+k4)/6
+
+# Plot y versus x for the orbit from t = 0 to t = 10
+plot(xpoints,ypoints)
+xlabel("x axis")
+ylabel("y axis")
+title("Space garbage")
+show()
