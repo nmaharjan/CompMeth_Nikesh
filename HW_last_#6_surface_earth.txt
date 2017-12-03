@@ -1,0 +1,30 @@
+#######Homework from chapter PDEs and Monte-Carlo Methods####
+
+# Program that visualizes the random point on the surface of the earth
+
+from visual import sphere
+from pylab import *
+from numpy.random import random
+
+# Let's pick 500 random points
+N = 500
+
+# Function to generate random theta and phi and then convert 
+# the angles to x, y, z coordintes
+def surface():
+    theta = arccos(1-2*random(N)) # Formula for generating angles theta
+    # and for phi
+    phi = 2*pi*random(N)
+    # Assume the radius of the globe is 1
+    x = sin(theta)*cos(phi)
+    y = sin(theta)*sin(phi)
+    z = cos(theta)
+    return x,y,z
+
+for i in range(N):
+    x,y,z = surface()
+    pos = zip(x,y,z)
+
+# To visualize the points in 3-dimensional space along random points
+for position in pos:
+ sphere(pos=position,radius=0.02) # spheres of radius 0.02
